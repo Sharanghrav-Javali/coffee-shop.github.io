@@ -391,6 +391,35 @@ footer {
 
 /* Mobile */
 @media (max-width: 768px) {
+
+  .navbar {
+    flex-wrap: wrap;
+  }
+
+  .menu-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+  }
+
+  .nav-links {
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;   /* SPACE BELOW HAMBURGER */
+    gap: 20px;
+    padding-bottom: 20px;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+}
+
+@media (max-width: 768px) {
   .navbar {
     flex-direction: column;
     gap: 15px;
@@ -1049,19 +1078,77 @@ h3 {
   line-height: 1.7;
 }
 
-/* Hide hamburger on desktop */
+/* ===== HAMBURGER FIX ONLY ===== */
+
 .menu-toggle {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
+  width: 30px;
+  height: 24px;
+  position: relative;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+/* Bars */
 .menu-toggle span {
-  width: 25px;
+  position: sticky;
+  width: 40px;
   height: 3px;
-  background: #d4af37;
-  transition: 0.3s;
+  background: #fff;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+.menu-toggle:hover  {
+  color: #d4af37;
+}
+
+/* Top bar */
+.menu-toggle span:nth-child(1) {
+  top: 0;
+}
+
+/* Middle bar */
+.menu-toggle span:nth-child(2) {
+  top: 10px;
+}
+
+/* Bottom bar */
+.menu-toggle span:nth-child(3) {
+  bottom: 0;
+}
+
+/* ACTIVE STATE (Turn into X perfectly centered) */
+.menu-toggle.active span:nth-child(1) {
+  top: 10px;
+  transform: rotate(45deg);
+}
+
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+  bottom: auto;
+  top: 10px;
+  transform: rotate(-45deg);
+}
+
+.menu-toggle {
+  padding: 5px;
+}
+
+/* Hide hamburger by default (Desktop) */
+.menu-toggle {
+  display: none;
+}
+
+/* Show hamburger only on mobile */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;   /* or block */
+  }
 }
 
 /* Mobile Layout */
@@ -1088,7 +1175,7 @@ h3 {
   }
 
   .nav-btn {
-    display: none; /* Hide shop button in mobile */
+    display: none; /*Hide shop button in mobile  */
   }
 }
 
@@ -1102,6 +1189,18 @@ h3 {
 
 .menu-toggle.active span:nth-child(3) {
   transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Hide hamburger by default (Desktop) */
+.menu-toggle {
+  display: none;
+}
+
+/* Show hamburger only on mobile */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;   /* or block */
+  }
 }
 
 /* ================= POPUP ================= */
@@ -1426,7 +1525,7 @@ h3 {
   color: #3e2723;
   background: linear-gradient(135deg, #f5d77a, #d4af37, #b8860b, #f5d77a);
   background-size: 300% 300%;
-  transition: all 0.3s ease;
+  transition:  0.3s ease;
   box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
   overflow: hidden;
 }
@@ -1436,22 +1535,24 @@ h3 {
   content: "";
   position: absolute;
   top: 0;
-  left: -75%;
-  width: 50%;
+  left: -100%;
+  width: 60%;
   height: 100%;
   background: linear-gradient(
     120deg,
-    rgba(255, 255, 255, 0.2),
-    rgba(255, 255, 255, 0.6),
-    rgba(255, 255, 255, 0.2)
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.4) 40%,
+    rgba(255, 255, 255, 0.8) 50%,
+    rgba(255, 255, 255, 0.4) 60%,
+    rgba(255, 255, 255, 0) 100%
   );
-  transform: skewX(-25deg);
-  transition: 0.75s;
+  transform: skewX(-20deg);
+  transition: left 0.8s ease;
 }
 
 /* Animate shine on hover */
 .order-btn:hover::after {
-  left: 125%;
+  left: 130%;
 }
 
 /* Hover Lift */
